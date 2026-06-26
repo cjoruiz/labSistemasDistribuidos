@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Administrador - Sistema de Audio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="estilos.css">
+  <script src="admin.js" defer></script>
+</head>
+<body>
+  <h1><i class="fa-solid fa-screwdriver-wrench"></i> Administrador - Registrar Audio</h1>
+
+  <div class="admin-form">
+    <div class="form-group">
+      <label>Tipo de Audio:</label>
+      <select id="admin-tipo" onchange="cambiarFormularioMetadatos()">
+        <option value="1">Musica</option>
+        <option value="2">Podcast</option>
+        <option value="3">Audiolibro</option>
+        <option value="4">Ruido Blanco</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Titulo:</label>
+      <input type="text" id="admin-titulo" placeholder="Titulo del audio">
+    </div>
+
+    <div class="form-group">
+      <label>Archivo de Audio (MP3):</label>
+      <input type="file" id="admin-audio-file" accept=".mp3,.wav,.m4a">
+    </div>
+
+    <div id="metadatos-especificos">
+      <div class="form-group">
+        <label>Artista Principal:</label>
+        <input type="text" id="admin-artista" placeholder="Artista o banda">
+      </div>
+      <div class="form-group">
+        <label>Album:</label>
+        <input type="text" id="admin-album" placeholder="Nombre del album">
+      </div>
+      <div class="form-group">
+        <label>Genero Musical:</label>
+        <input type="text" id="admin-genero" placeholder="Pop, Rock, Jazz...">
+      </div>
+    </div>
+
+    <button type="button" class="btn-registrar" onclick="registrarAudio()">
+      <i class="fa-solid fa-upload"></i> Registrar Audio
+    </button>
+    <div id="admin-mensaje"></div>
+  </div>
+
+  <div id="log-panel">
+    <div id="log-header" onclick="toggleLog()">
+      <i class="fa-solid fa-terminal"></i> Consola de Depuracion
+      <span id="log-toggle-icon">▼</span>
+    </div>
+    <div id="log-content"></div>
+  </div>
+</body>
+</html>

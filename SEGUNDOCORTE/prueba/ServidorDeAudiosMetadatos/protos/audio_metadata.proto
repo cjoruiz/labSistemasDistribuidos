@@ -1,0 +1,124 @@
+syntax = "proto3";
+
+package servicios;
+option go_package = "/protos";
+
+service MetadataService {
+  rpc GetAudioTypes(Empty) returns (AudioTypesResponse);
+  rpc GetAudiosByType(AudioTypeRequest) returns (AudiosListResponse);
+  rpc GetAudioDetails(AudioDetailsRequest) returns (AudioDetailsResponse);
+  rpc GetAudioFilename(AudioFilenameRequest) returns (AudioFilenameResponse);
+  rpc BuscarAudio(PeticionDTO) returns (RespuestaMetadataAudioDTO);
+}
+
+message Empty {}
+
+message AudioType {
+  int32 id = 1;
+  string nombre = 2;
+}
+
+message AudioTypesResponse {
+  repeated AudioType audio_types = 1;
+}
+
+message AudioTypeRequest {
+  int32 audio_type_id = 1;
+}
+
+message AudiosListResponse {
+  repeated AudioSummary audios = 1;
+}
+
+message AudioSummary {
+  string id = 1;
+  string titulo = 2;
+}
+
+message AudioDetailsRequest {
+  string audio_id = 1;
+}
+
+message AudioDetailsResponse {
+  string id = 1;
+  string titulo = 2;
+  string autor = 3;
+  string album = 4;
+  string genero = 5;
+  int32 duracion = 6;
+  int32 tipo_id = 7;
+  string tipo_nombre = 8;
+  string fecha_lanzamiento = 9;
+  bool disponible = 10;
+  string nombre_archivo = 11;
+  
+  // Música
+  string sello_discografico = 12;
+  
+  // Podcast
+  string nombre_podcast = 13;
+  string numero_temporada_episodio = 14;
+  string notas_show = 15;
+  string clasificacion_contenido = 16;
+  
+  // Audiolibro
+  string narrador = 17;
+  string editorial = 18;
+  string isbn = 19;
+  string capitulo = 20;
+  
+  // Ruido Blanco
+  string tipo_sonido = 21;
+  string fuente_audio = 22;
+  string uso_sugerido = 23;
+  string proveedor_contenido = 24;
+  string duracion_bucle = 25;
+  string frecuencia_dominante = 26;
+}
+
+message AudioFilenameRequest {
+  string audio_id = 1;
+}
+
+message AudioFilenameResponse {
+  string filename = 1;
+}
+
+message PeticionDTO {
+  string titulo = 1;
+}
+
+message MetadataAudio {
+  string titulo = 1;
+  string autor = 2;
+  string album = 3;
+  string genero = 4;
+  int32 duracion = 5;
+  int32 tipo_id = 6;
+  string tipo_nombre = 7;
+  string fecha_lanzamiento = 8;
+  bool disponible = 9;
+  string nombre_archivo = 10;
+  
+  string sello_discografico = 11;
+  string nombre_podcast = 12;
+  string numero_temporada_episodio = 13;
+  string notas_show = 14;
+  string clasificacion_contenido = 15;
+  string narrador = 16;
+  string editorial = 17;
+  string isbn = 18;
+  string capitulo = 19;
+  string tipo_sonido = 20;
+  string fuente_audio = 21;
+  string uso_sugerido = 22;
+  string proveedor_contenido = 23;
+  string duracion_bucle = 24;
+  string frecuencia_dominante = 25;
+}
+
+message RespuestaMetadataAudioDTO {
+  MetadataAudio obj_audio = 1;
+  int32 codigo = 2;
+  string mensaje = 3;
+}

@@ -1,0 +1,101 @@
+syntax = "proto3";
+
+package metadatos;
+option go_package = "/serviciosMetadatos";
+
+// ─────────────────────────────────────────────
+// Servicio de metadatos de audios
+// ─────────────────────────────────────────────
+service ServicioMetadatos {
+  // Obtiene todos los tipos de audio registrados
+  rpc ObtenerTiposDeAudio(SolicitudVacia) returns (RespuestaTiposAudio);
+
+  // Obtiene la lista de audios de un tipo dado su id
+  rpc ObtenerAudiosPorTipo(SolicitudTipo) returns (RespuestaListaAudios);
+
+  // Obtiene los detalles (metadatos) de un audio dado su id
+  rpc ObtenerDetallesAudio(SolicitudAudio) returns (RespuestaDetallesAudio);
+}
+
+// ─── Mensajes generales ───────────────────────
+message SolicitudVacia {}
+
+message SolicitudTipo {
+  int32 idTipo = 1;
+}
+
+message SolicitudAudio {
+  int32 idAudio = 1;
+}
+
+// ─── Tipos de audio ───────────────────────────
+message TipoAudio {
+  int32 id    = 1;
+  string nombre = 2;
+}
+
+message RespuestaTiposAudio {
+  repeated TipoAudio tipos = 1;
+}
+
+// ─── Lista de audios ──────────────────────────
+message AudioResumen {
+  int32  id      = 1;
+  string titulo  = 2;
+  string rutaArchivoMp3 = 3; // ruta usada por el servidor de streaming
+}
+
+message RespuestaListaAudios {
+  repeated AudioResumen audios = 1;
+}
+
+// ─── Detalles por tipo ────────────────────────
+
+// Música
+message MetadataMusica {
+  string artistaPrincipal  = 1;
+  string album             = 2;
+  string generoMusical     = 3;
+  string tituloCancion     = 4;
+  string selloDiscografico = 5;
+  int32  anioLanzamiento   = 6;
+}
+
+// Podcast
+message MetadataPodcast {
+  string nombrePodcast        = 1;
+  string tituloEpisodio       = 2;
+  string host                 = 3;
+  string temporadaEpisodio    = 4;
+  string notasShow            = 5;
+  string clasificacionContenido = 6;
+}
+
+// Audiolibro
+message MetadataAudiolibro {
+  string tituloLibro  = 1;
+  string autor        = 2;
+  string narrador     = 3;
+  string editorial    = 4;
+  string isbn         = 5;
+  int32  capitulo     = 6;
+}
+
+// Ruido Blanco
+message MetadataRuidoBlanco {
+  string tipoSonido          = 1;
+  string fuenteAudio         = 2;
+  string usoSugerido         = 3;
+  string proveedorContenido  = 4;
+  string duracionBucle       = 5;
+  string frecuenciaDominante = 6;
+}
+
+// Respuesta de detalles: sólo uno de los campos estará lleno
+message RespuestaDetallesAudio {
+  AudioResumen resumen    = 1;
+  MetadataMusica      musica       = 2;
+  MetadataPodcast     podcast      = 3;
+  MetadataAudiolibro  audiolibro   = 4;
+  MetadataRuidoBlanco ruidoBlanco  = 5;
+}

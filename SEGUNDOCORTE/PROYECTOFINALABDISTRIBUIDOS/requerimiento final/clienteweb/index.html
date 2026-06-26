@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Sistema Distribuido de Audio</title>
+  <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+  <script src="./bundle.js" defer></script>
+  <script src="./funciones.js" defer></script>
+  <script src="./animaciones.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <div id="tab-cliente" class="tab-content active">
+    <h1><i class="fa-solid fa-headphones"></i> Reproductor de Audio</h1>
+
+    <div class="status-bar">
+      <input type="text" id="nickname-input" placeholder="Tu nickname..." value="Usuario" maxlength="20">
+      <button type="button" id="btnConectar" onclick="conectarReacciones()"><i class="fa-solid fa-plug"></i> Conectar Reacciones</button>
+      <button type="button" id="btnDesconectar" onclick="desconectarReacciones()" disabled><i class="fa-solid fa-plug-circle-xmark"></i> Desconectar</button>
+      <span id="conexion-status" class="status-desconectado"><i class="fa-solid fa-circle"></i> Desconectado</span>
+    </div>
+
+    <div class="main-layout">
+      <div class="panel-izquierdo">
+        <div class="card">
+          <h3><i class="fa-solid fa-list"></i> Tipos de Audio</h3>
+          <div id="tipos-lista" class="lista-tipos">
+            <div class="loading">Cargando tipos...</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3><i class="fa-solid fa-music"></i> Audios Disponibles</h3>
+          <div id="audios-lista" class="lista-audios">
+            <div class="placeholder">Selecciona un tipo de audio</div>
+          </div>
+        </div>
+
+        <div class="panel-derecho">
+        <div class="card">
+          <h3><i class="fa-solid fa-users"></i> Actividad de Usuarios</h3>
+          <div id="notificaciones-usuarios">
+            <div class="placeholder">Esperando actividad...</div>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <div class="panel-central">
+        <div class="card" id="detalles-card">
+          <h3><i class="fa-solid fa-circle-info"></i> Detalles del Audio</h3>
+          <div id="detalles-contenido" class="detalles-contenido">
+            <div class="placeholder">Selecciona un audio para ver sus detalles</div>
+          </div>
+          <button type="button" id="btn-reproducir" class="btn-play" onclick="reproducirAudioSeleccionado()" disabled>
+            <i class="fa-solid fa-play"></i> Reproducir
+          </button>
+        </div>
+
+        <div class="card">
+          <h3><i class="fa-solid fa-play"></i> Reproductor</h3>
+          <audio id="audio-player" controls style="display:none"></audio>
+        </div>
+
+        <div class="card reacciones-card">
+          <h3><i class="fa-solid fa-heart"></i> Reacciones en Tiempo Real</h3>
+          <div id="reacciones">
+            <i class="fa-solid fa-thumbs-up reaction icon-like" data-reaccion="like" onclick="enviarReaccion(event)"></i>
+            <i class="fa-solid fa-heart reaction icon-heart" data-reaccion="heart" onclick="enviarReaccion(event)"></i>
+            <i class="fa-solid fa-face-sad-tear reaction icon-sad" data-reaccion="sad" onclick="enviarReaccion(event)"></i>
+            <i class="fa-solid fa-face-laugh-squint reaction icon-fun" data-reaccion="fun" onclick="enviarReaccion(event)"></i>
+          </div>
+          <div id="mensajes-reacciones">
+            <div class="placeholder">Conectate para ver reacciones en vivo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="log-panel">
+    <div id="log-header" onclick="toggleLog()">
+      <i class="fa-solid fa-terminal"></i> Consola de Depuracion
+      <span id="log-toggle-icon">▼</span>
+    </div>
+    <div id="log-content"></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package servicios;
+option go_package = "/protos";
+
+service StreamingService {
+  rpc StreamAudio(StreamRequest) returns (stream AudioChunk);
+}
+
+message StreamRequest {
+  string audio_id = 1;
+}
+
+message AudioChunk {
+  bytes data = 1;
+}

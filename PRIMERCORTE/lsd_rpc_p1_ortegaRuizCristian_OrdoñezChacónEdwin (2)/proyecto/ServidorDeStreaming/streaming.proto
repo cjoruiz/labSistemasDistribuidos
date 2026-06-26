@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package streaming;
+option go_package = "/serviciosStreaming";
+
+// Servicio de streaming de audio en formato mp3
+service ServicioStreaming {
+  // Transmite un archivo de audio en fragmentos (chunks)
+  rpc ReproducirAudio(SolicitudStreaming) returns (stream FragmentoAudio);
+}
+
+message SolicitudStreaming {
+  string rutaArchivo = 1; // ruta del archivo mp3 en el servidor de streaming
+}
+
+message FragmentoAudio {
+  bytes datos = 1; // fragmento binario del mp3
+}

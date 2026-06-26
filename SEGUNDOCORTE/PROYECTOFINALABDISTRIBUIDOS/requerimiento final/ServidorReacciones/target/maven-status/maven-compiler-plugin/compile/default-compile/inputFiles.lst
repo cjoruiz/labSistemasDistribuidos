@@ -1,0 +1,5 @@
+/home/cjor/Documentos/PROYECTOFINALABDISTRIBUIDOS/requerimiento final/ServidorReacciones/src/main/java/co/edu/unicauca/servidorreacciones/ServidorReaccionesApplication.java
+/home/cjor/Documentos/PROYECTOFINALABDISTRIBUIDOS/requerimiento final/ServidorReacciones/src/main/java/co/edu/unicauca/servidorreacciones/capaConfiguracionWebSocket/WebSocketConfig.java
+/home/cjor/Documentos/PROYECTOFINALABDISTRIBUIDOS/requerimiento final/ServidorReacciones/src/main/java/co/edu/unicauca/servidorreacciones/capaControladores/ReaccionesController.java
+/home/cjor/Documentos/PROYECTOFINALABDISTRIBUIDOS/requerimiento final/ServidorReacciones/src/main/java/co/edu/unicauca/servidorreacciones/capaFachadaServices/DTO/ReaccionDTO.java
+/home/cjor/Documentos/PROYECTOFINALABDISTRIBUIDOS/requerimiento final/ServidorReacciones/src/main/java/co/edu/unicauca/servidorreacciones/capaFachadaServices/DTO/ReproduccionDTO.java
